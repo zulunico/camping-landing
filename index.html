@@ -61,11 +61,12 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  transition: background .3s, backdrop-filter .3s;
-}
-nav.scrolled {
   background: rgba(44, 74, 46, 0.95);
   backdrop-filter: blur(10px);
+  transition: background .3s;
+}
+nav.scrolled {
+  background: rgba(44, 74, 46, 0.98);
 }
 .nav-logo {
   font-family: 'Cormorant Garamond', serif;
@@ -1752,18 +1753,29 @@ body.en .llegar-opciones[data-lang="en"] { display: flex; }
 </div>
 
 <script>
-// PRELOADER
-window.addEventListener('load', () => {
-  setTimeout(() => {
-    document.getElementById('preloader').classList.add('hidden');
-  }, 2000);
-});
+// PRELOADER — espera al video del hero
+const preloader = document.getElementById('preloader');
 
-// Si tarda más de 4s lo oculta de todas formas
-setTimeout(() => {
-  const p = document.getElementById('preloader');
-  if (p) p.classList.add('hidden');
-}, 4000);
+function ocultarPreloader() {
+  preloader.classList.add('hidden');
+}
+
+// Detectar qué video cargar según dispositivo
+const isMobile = window.innerWidth <= 768;
+const heroVideo = isMobile
+  ? document.querySelector('.video-mobile')
+  : document.querySelector('.video-desktop');
+
+if (heroVideo) {
+  // Video listo para reproducirse
+  heroVideo.addEventListener('canplaythrough', ocultarPreloader, { once: true });
+
+  // Fallback: si en 6s no cargó igual ocultamos
+  setTimeout(ocultarPreloader, 6000);
+} else {
+  // Sin video — ocultar después de animación
+  setTimeout(ocultarPreloader, 2000);
+}
 
 // NAV scroll
 window.addEventListener('scroll', () => {
