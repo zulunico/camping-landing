@@ -1023,9 +1023,20 @@ body.en .llegar-opciones[data-lang="en"] { display: flex; }
   }
   .exp-video-wrap {
     min-height: 0;
+    height: 100vw;
     aspect-ratio: 1 / 1;
     position: relative;
     order: 2;
+  }
+  .exp-video-wrap video {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    min-width: unset;
+    min-height: unset;
+    transform: none;
+    object-fit: cover;
   }
   .exp-text { order: 1; }
   .exp-text { padding: 2.5rem 1.25rem; }
@@ -1080,7 +1091,19 @@ body.en .llegar-opciones[data-lang="en"] { display: flex; }
 
 @media(max-width: 768px) {
   .video-desktop { display: none; }
-  .video-mobile { display: block; }
+  .video-mobile {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    min-width: unset;
+    min-height: unset;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+    object-position: center center;
+  }
 }
 
 </style>
