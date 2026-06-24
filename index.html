@@ -1021,7 +1021,13 @@ body.en .llegar-opciones[data-lang="en"] { display: flex; }
   .experiencia .section-inner {
     grid-template-columns: 1fr;
   }
-  .exp-video-wrap { min-height: 280px; }
+  .exp-video-wrap {
+    min-height: 0;
+    aspect-ratio: 1 / 1;
+    position: relative;
+    order: 2;
+  }
+  .exp-text { order: 1; }
   .exp-text { padding: 2.5rem 1.25rem; }
   .section-title { font-size: clamp(1.8rem, 7vw, 2.5rem); }
 
@@ -1067,6 +1073,16 @@ body.en .llegar-opciones[data-lang="en"] { display: flex; }
   .stats { grid-template-columns: repeat(2, 1fr); }
 }
 
+
+/* VIDEO HERO — desktop vs móvil */
+.video-mobile { display: none; }
+.video-desktop { display: block; }
+
+@media(max-width: 768px) {
+  .video-desktop { display: none; }
+  .video-mobile { display: block; }
+}
+
 </style>
 </head>
 <body>
@@ -1092,8 +1108,11 @@ body.en .llegar-opciones[data-lang="en"] { display: flex; }
 <section class="hero" id="inicio">
   <div class="hero-bg">
     <div class="hero-video-bg">
-      <video autoplay muted loop playsinline preload="auto">
+      <video class="video-desktop" autoplay muted loop playsinline preload="auto">
         <source src="https://raw.githubusercontent.com/zulunico/camping-assets/main/27(1)-1.mp4" type="video/mp4">
+      </video>
+      <video class="video-mobile" autoplay muted loop playsinline preload="auto">
+        <source src="https://raw.githubusercontent.com/zulunico/camping-assets/main/27(5)-1.mp4" type="video/mp4">
       </video>
     </div>
   </div>
